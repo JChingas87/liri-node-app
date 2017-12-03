@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/JChingas87/liri-node-app#readme",
   "dependencies": {
-    "inquirer": "^4.0.1"
+    "inquirer": "^4.0.1",
+    "node-spotify-api": "^1.0.7",
+    "request": "^2.83.0",
+    "twitter": "^1.7.1"
   }
 }
