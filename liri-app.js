@@ -8,6 +8,7 @@ var fs = require("fs");
 
 var client = new twitter(keys);
 
+
 if (process.argv[2].toLowerCase() === 'spotify-this-song') {
     var spotify = new Spotify({
         id: 'aded1294eefd467db8850910508297ff',
@@ -43,7 +44,8 @@ if (process.argv[2].toLowerCase() === 'spotify-this-song') {
             });
     });
 
-} else if (process.argv[2].toLowerCase() === "my-tweets") {
+} else
+if (process.argv[2].toLowerCase() === "my-tweets") {
 
     inquirer.prompt([{
         type: 'input',
@@ -68,4 +70,40 @@ if (process.argv[2].toLowerCase() === 'spotify-this-song') {
             }
         });
     });
+} else(process.argv[2].toLowerCase() === "movie-this") {
+
+    inquirer.prompt([{
+        type: "input",
+        message: "What movie would you like to see?",
+        name: "userChoice",
+    }]).then(function(response) {
+        omdb.get_movie(response.userChoice);
+    });
+
+    function getMovie(user_movie) {
+        var omdb_api = "http: //www.omdbapi.com/?i=tt3896198&apikey=fe03367a=" + user_movie;
+        request(omdb_api, function(error, response, body) {
+            if (error) {
+                return console.log(error);
+            } else {
+                console.log("------------------------")
+                var movie = JSON.parse(body);
+                var actors = movie.Actors;
+                console.log(movie.Title);
+                console.log(movie.Released);
+                console.log(movie.Ratings[0].Value);
+                console.log(movie.Ratings[1].Value)
+                console.log(movie.Country);
+                console.log(movie.Language)
+                console.log("Plot: " + movie.Plot);
+                console.log("Actors: " + actors);
+                console.log("------------------------")
+
+
+            }
+
+        });
+    }
+
 }
+getMovie();
